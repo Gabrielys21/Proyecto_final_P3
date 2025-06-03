@@ -27,7 +27,7 @@ class ChatbotGUI:
         self.chat_log.config(state='disabled')
 
         # Example of sending a message via WhatsApp
-        # send_whatsapp_message("whatsapp_number", gpt_response)
+        send_whatsapp_message("test_whatsapp_number", gpt_response)  # Enviar mensaje de WhatsApp para pruebas
 
 if __name__ == "__main__":
     root = tk.Tk()
