@@ -11,38 +11,31 @@ ODOO_PASSWORD = "your_odoo_password"
 
 # Función para enviar mensajes a través de WhatsApp
 
-def send_whatsapp_message(to, message, is_template=False, template_name='hello_world', language_code='en_US'):
-    print(f"[send_whatsapp_message] Iniciando envío de mensaje a: {to}")
+
+def send_whatsapp_message(phone_number, message):
+    url = f"{WHATSAPP_API_URL}/{PHONE_NUMBER_ID}/messages"
+    
     headers = {
-        'Authorization': f'Bearer {WHATSAPP_ACCESS_TOKEN}',
-        'Content-Type': 'application/json'
+        "Authorization": f"Bearer {WHATSAPP_ACCESS_TOKEN}",
+        "Content-Type": "application/json"
     }
-    if is_template:
-        data = {
-            'messaging_product': 'whatsapp',
-            'to': to,
-            'type': 'template',
-            'template': {
-                'name': template_name,
-                'language': {'code': language_code}
-            }
+    
+    data = {
+        "messaging_product": "whatsapp",
+        "to": phone_number,
+        "type": "text",
+        "text": {
+            "body": message
         }
-    else:
-        data = {
-            'messaging_product': 'whatsapp',
-            'to': to,
-            'type': 'text',
-            'text': {'body': message}
-        }
-    print(f"[send_whatsapp_message] Datos a enviar: {data}")
+    }
+    
     try:
-        response = requests.post(WHATSAPP_API_URL, headers=headers, json=data)
-        response.raise_for_status() # Lanza una excepción para códigos de estado de error (4xx o 5xx)
-        print(f"[send_whatsapp_message] Mensaje enviado exitosamente. Respuesta de la API de WhatsApp: {response.json()}")
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"[send_whatsapp_message] ERROR al enviar mensaje de WhatsApp: {e}")
-        return {"error": str(e)}
+        response = requests.post(url, headers=headers, json=data)
+        print(f"WhatsApp API Response: {response.status_code} - {response.text}")
+        return response.status_code == 200
+    except Exception as e:
+        print(f"Error enviando mensaje WhatsApp: {e}")
+        return False
 
 # Función para interactuar con ChatGPT
 
