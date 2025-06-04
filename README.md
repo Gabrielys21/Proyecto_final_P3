@@ -1,3 +1,6 @@
+# Video Explicativo Angel Chavarria y Rony Carrillo
+https://drive.google.com/drive/folders/1fhAjccfVKvPodIaDN7NLwPX5Jw4_n78Q?usp=sharing
+
 # Proyecto de Chatbot Inteligente
 
 Este proyecto implementa un chatbot en Odoo que interactúa con clientes utilizando la API de ChatGPT y la API de WhatsApp Business de Meta. El proyecto sigue el enfoque Agent2Agent (A2A) y la arquitectura Model-Centered Programming (MCP).
